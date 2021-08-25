@@ -26,13 +26,13 @@ app.use(express.static("public"));
 
 // Routes
 const index = require("./routes/index.js");
-const products = require("./routes/product-route");
+const posts = require("./routes/post-route");
 const upload = require("./routes/upload-route");
 const feedbacks = require("./routes/feedback-route");
 const users = require("./routes/user-route");
 
 app.use("/", index);
-app.use("/posts", products);
+app.use("/posts", posts);
 app.use("/feedbacks", feedbacks);
 app.use("/upload", upload);
 app.use("/users", users);

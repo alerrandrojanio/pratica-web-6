@@ -3,16 +3,16 @@ module.exports = (sequelize, DataTypes) => {
     "posts",
     {
       nome: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
       },
       data: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
       },
       hora: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
       },
       imagem: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
       },
     },
     { timestamps: false }

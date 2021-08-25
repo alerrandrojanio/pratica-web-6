@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS feedback(
     comentario text NOT NULL,
     data text NOT NULL,
     hora text NOT NULL,
-    FOREIGN KEY (id_post) REFERENCES posts (id),
+    FOREIGN KEY (id_post) REFERENCES posts (id)
 );
 
 CREATE TABLE IF NOT EXISTS users(
