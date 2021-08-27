@@ -1,4 +1,4 @@
-class Post {
+class Postagem {
   constructor(texto, data, hora, img) {
     this.texto = texto;
     this.data = data;
@@ -7,4 +7,4 @@ class Post {
   }
 }
 
-module.exports = Post;
+module.exports = Postagem;

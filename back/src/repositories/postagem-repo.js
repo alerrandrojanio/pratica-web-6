@@ -1,6 +1,7 @@
 const db = require("../models");
-const Post = db.posts;
-const Feedback = db.feedbacks;
+const Comentario = db.comentarios;
+const Usuario = db.usuarios;
+const Postagem = db.postagens;
 const { Op } = require("sequelize");
 
 exports.save = async (post) => {
@@ -20,13 +21,13 @@ exports.save = async (post) => {
 };
 
 exports.findAll = async () => {
-  const result = await Post.findAll();
+  const result = await Postagem.findAll();
   return result;
 };
 
 
 exports.findOne = async (id) => {
-  const result = await Post.findOne({
+  const result = await Postagem.findOne({
     where: {
       id: id,
     },
@@ -35,11 +36,15 @@ exports.findOne = async (id) => {
 };
 
 exports.findOne = async (id) => {
-  return await Post.findByPk(id, {
+  return await Postagem.findByPk(id, {
     include: [
       {
-        model: Feedback,
+        model: Comentario,
         attributes: { exclude: ["postId"] },
+      },
+      {
+        model: Usuario,
+        attributes: { exclude: ["usuarioId"] },
       },
     ],
   })
@@ -53,7 +58,7 @@ exports.findOne = async (id) => {
 
 
 exports.update = async (id, post) => {
-  return await Post.update(
+  return await Postagem.update(
     {
       texto: post.texto,
       data: post.data,
@@ -77,7 +82,7 @@ exports.update = async (id, post) => {
 };
 
 exports.delete = async (id) => {
-  await Post.destroy({
+  await Postagem.destroy({
     where: {
       id: id,
     },

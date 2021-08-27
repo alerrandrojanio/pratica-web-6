@@ -1,15 +1,13 @@
 const db = require("../models");
-const Feedback = db.feedbacks;
+const Comentario = db.comentarios;
 
-exports.save = async (postId, feedback) => {
-  return Feedback.create({
-    id_post: feedback.id_post,
-    comentario: feedback.comentario,
-    data: feedback.data,
-    hora: feedback.hora
+exports.save = async (postId, comentario) => {
+  return Comentario.create({
+    comentario: comentario.Comentario,
+    postId: postId,
   })
     .then((result) => {
-      console.log("Created feedback: " + JSON.stringify(result));
+      console.log("Created comentario: " + JSON.stringify(result));
       return result;
     })
     .catch((err) => {
@@ -18,12 +16,12 @@ exports.save = async (postId, feedback) => {
 };
 
 exports.findAll = async () => {
-  const result = await Feedback.findAll();
+  const result = await Comentario.findAll();
   return result;
 };
 
 exports.findOne = async (id) => {
-  const result = await Feedback.findOne({
+  const result = await Comentario.findOne({
     where: {
       id: id,
     },
@@ -31,13 +29,10 @@ exports.findOne = async (id) => {
   return result;
 };
 
-exports.update = async (id, feedback) => {
-  return await Feedback.update(
+exports.update = async (id, comentario) => {
+  return await Comentario.update(
     {
-      id_post: feedback.id_post,
-      comentario: feedback.comentario,
-      data: feedback.data,
-      hora: feedback.hora
+      comentario: comentario.comentario
     },
     {
       where: {
@@ -47,7 +42,7 @@ exports.update = async (id, feedback) => {
     }
   )
     .then((result) => {
-      console.log("Update feedback: " + JSON.stringify(result));
+      console.log("Update comentario: " + JSON.stringify(result));
       return result[1][0]; // Only Postgres, 1 is number of affect records, 0 is first element
     })
     .catch((err) => {
@@ -56,7 +51,7 @@ exports.update = async (id, feedback) => {
 };
 
 exports.delete = async (id) => {
-  await Feedback.destroy({
+  await Comentario.destroy({
     where: {
       id: id,
     },

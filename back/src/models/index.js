@@ -16,11 +16,16 @@ sequelize.sync({
 });
 
 const db = {};
+db.usuarios = require("./user-model")(sequelize, Sequelize);
+db.postagens = require("./postagem-model")(sequelize, Sequelize);
+db.comentarios = require("./comment-model")(sequelize, Sequelize);
 
-db.posts = require("./post-model")(sequelize, Sequelize);
-db.feedbacks = require("./feedback-model")(sequelize, Sequelize);
+//Relations Users x Posts
+db.usuarios.hasMany(db.postagens);
+db.postagens.belongsTo(db.usuarios);
 
-db.posts.hasMany(db.feedbacks);
-db.feedbacks.belongsTo(db.posts);
+//Relations Posts x Comments
+db.postagens.hasMany(db.comentarios);
+db.comentarios.belongsTo(db.postagens);
 
 module.exports = db;
