@@ -27,15 +27,13 @@ app.use(express.static("public"));
 // Routes
 const index = require("./routes/index.js");
 const posts = require("./routes/post-route");
-const upload = require("./routes/upload-route");
-const feedbacks = require("./routes/feedback-route");
-const users = require("./routes/user-route");
+const feedbacks = require("./routes/comentario-route");
+const usuarios = require("./routes/user-route");
 
 app.use("/", index);
 app.use("/posts", posts);
-app.use("/feedbacks", feedbacks);
-app.use("/upload", upload);
-app.use("/users", users);
+app.use("/comentarios", feedbacks);
+app.use("/usuarios", usuarios);
 app.use("/ok", (req, res, next) => {
   session = req.session;
 

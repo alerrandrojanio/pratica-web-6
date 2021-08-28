@@ -1,8 +1,8 @@
 <template>
   <div>
-    Usuário: <input type="text" v-model="login"> <br/>
-    Senha:  <input type="password" v-model="password"> <br/>
-    <button type="submit" @click="logar">Login</button>
+    Usuário: <input type="text" v-model="usuario"> <br/>
+    Senha:  <input type="password" v-model="senha"> <br/>
+    <button type="submit" @click="login">Login</button>
   </div>                
 </template>
 <script>
@@ -12,40 +12,54 @@ export default {
    
 data() {
     return {
-            login: "",
-            password: "",
-            baseURI:"http://localhost:3000/users/login"    
+            usuario: "",
+            senha: "",
+            usuarios: [],
+            baseURI:"http://localhost:3000/usuarios"   
     }
 },
     methods:{
-        logar: function() {
-      axios
-        .post(
-          this.baseLogin,
-          {
-            login: this.login,
-            password: this.password,
-          },
-          { withCredentials: true }
-        )
-        .then((result) => {
-          let userId = this.getCookie("userId");
-          if (userId) {
-            localStorage.setItem("user", JSON.stringify(result.data));
-          }
-          this.$router.go();
-        });
+
+        methods:{
+        getAll() {
+            axios.get(this.baseURI).then((result) =>{
+                    this.usuarios = result.data
+                })
+        },
+
+        login() {
+            for(var i = 0; i < this.usuarios.length; i++){
+                if(this.usuario == this.usuarios[i].usuario){
+                    if(this.senha == this.usuarios[i].senha){
+                        this.$router.replace('/postar'); continue;
+                    } else {
+                        alert("SENHA INCORRETA!");
+                    }
+                }  
+            }
+            
+            i = 0; 
+            while(i < this.usuarios.length){
+                if(this.usuario != this.usuarios[i].usuario){
+                    i++;
+                }
+                else{
+                    break;
+                }
+                if(i == this.usuarios.length){
+                    alert("USUARIO INEXISTENTE!");
+                }
+            }
+        }
     },
-    getCookie(name) {
-      let match = document.cookie.match(new RegExp(name + "=([^;]+)"));
-      if (match) return match[1];
-      return;
-    },
+    
+    created: function(){
+        this.$nextTick(this.getAll)
+    }
+        
   },
 
-    created: function(){
-        this.$nextTick()
-    }
+   
 }
 </script>
 

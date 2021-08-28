@@ -17,3 +17,5 @@ class UsuarioService{
         return usuarioRepo.delete(id);
     }
 }
+
+module.exports = UsuarioService;

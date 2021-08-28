@@ -16,9 +16,9 @@ sequelize.sync({
 });
 
 const db = {};
-db.usuarios = require("./user-model")(sequelize, Sequelize);
+db.usuarios = require("./usuario-model")(sequelize, Sequelize);
 db.postagens = require("./postagem-model")(sequelize, Sequelize);
-db.comentarios = require("./comment-model")(sequelize, Sequelize);
+db.comentarios = require("./comentario-model")(sequelize, Sequelize);
 
 //Relations Users x Posts
 db.usuarios.hasMany(db.postagens);

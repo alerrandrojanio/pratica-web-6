@@ -1,17 +1,11 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      
-      <router-link to="/funcionarios">Funcionários</router-link> |
-      <router-link to="/buscar">Buscar</router-link>
-      <router-link to="/">Logout</router-link>
-    </div>
-    <router-view/>
+  <div id="nav">
+    <router-link to="/postar">Postar</router-link> |
+    <router-link to="/mostrar">Mostrar</router-link> |
+    <router-link to="/">Logout</router-link>
   </div>
+  <router-view/>
 </template>
-
-<script>
-</script>
 
 
 <style>
