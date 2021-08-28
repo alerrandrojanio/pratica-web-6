@@ -1,5 +1,5 @@
 class Comentario {
-    constructor(comentario) {
+    constructor(comentario, data, hora) {
       this.comentario = comentario;
       this.data = data;
       this.hora = hora;
